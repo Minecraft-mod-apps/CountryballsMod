@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: e6fcadec48aec5e4f9b819a8c88a8f22
+  m_SerializeEntries:
+  - m_GUID: 05236b36664e8b546b5694851a853513
+    m_Address: Assets/ModFiles/CountryBall_BE.mcpack3.json
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3ac22825f7668154db1b4ec25f8730af
+    m_Address: Assets/ModFiles/expansive-ores-rs-v1_4.mcpack1.json
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: eb78963cf7327d042ae92b79f7947679
+    m_Address: Assets/ModFiles/expansive-ores-rs-v1_4.mcpack2.json
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3a98d2417f99baa4cb02d80ca1cbcfb2
+    m_Address: Assets/ModFiles/expansiveores-bh-v1_4.mcpack1.json
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 61996964eefc99c478a4644a46e99f41
+    m_Address: Assets/ModFiles/extra-vehicles-addon.mcaddon3.json
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 34ebb0747aed8544bbe9c41012c5075e
+    m_Address: Assets/ModFiles/extra-vehicles-addon.mcaddon2.json
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9d077b1141ca6664aa340c531d156c84
+    m_Address: Assets/ModFiles/extra-vehicles-addon.mcaddon1.json
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5669789d60dafc148bdb5e35982ac040
+    m_Address: Assets/ModFiles/CountryBall_BE.mcpack1.json
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 73afabea263a5574681cc7818277a45d
+    m_Address: Assets/ModFiles/expansiveores-bh-v1_4.mcpack2.json
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b1e3868ee2f6c7b4482295f36f8f2a54
+    m_Address: Assets/ModFiles/CountryBall_BE.mcpack2.json
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fb5f23a868d7a5b4490ccbe843e26cd2
+    m_Address: Assets/ModFiles/CountryBall_RE.mcpack1.json
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d8336cf8b03e43c46b86651fe9e198b8
+    m_Address: Assets/ModFiles/CountryBall_RE.mcpack3.json
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5d6960e3ca390e242ac16a00d216e160
+    m_Address: Assets/ModFiles/expansiveores-bh-v1_4.mcpack3.json
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a86fe846e107d2b4d907ecd3c8f28547
+    m_Address: Assets/ModFiles/CountryBall_RE.mcpack2.json
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 78ad52ac830c7db4ba9335beac9d0c28
+    m_Address: Assets/ModFiles/expansive-ores-rs-v1_4.mcpack3.json
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 3218486785439804185c4f24f5d7aba9, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 45d25f5f6601f2d4598854488877889a, type: 2}
+    - {fileID: 11400000, guid: d6bbf1fcc31f58f4e84062dd9eb1afb3, type: 2}
