@@ -18,7 +18,7 @@ public class LoadingScreen : MonoBehaviour
 
     private void Awake()
     {
-        EventHandler.AdIsShowing.AddListener(() =>
+        EventHandler.AdIsShow.AddListener(() =>
         {
             _isOpenApp = true;
             SetDelay();

@@ -1,7 +1,10 @@
 fileFormatVersion: 2
-guid: 53ec29297e8150f74b306bf86c43d062
+guid: 8c409ab99e4f4317b2bec2f54be2a2fc
 labels:
 - gvh
+- gvh_version-7.0.1
+- gvhp_exportpath-ExternalDependencyManager/Editor/Google.VersionHandler.dll
+- gvhp_targets-editor
 PluginImporter:
   externalObjects: {}
   serializedVersion: 2

@@ -1,53 +1,85 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using UnityEngine.AddressableAssets;
 using SimpleFileBrowser;
 
 public class FileManager : MonoBehaviour
 {
-    [SerializeField] private List<string> _modFiles;
-    [SerializeField] private GameObject _installScreen;
-    private string _currentModFile;
-    private FileInstaller _fileInstaller;
+    [SerializeField] private string _editorPath;
+    [SerializeField] private string _androidPath;
+    [SerializeField] private string[] _filesNames;
+    private List<byte> _bytes = new List<byte>();
+    private int _fileNameIndex;
 
-    public IReadOnlyList<string> ModFiles => _modFiles;
-
-    void Start()
+    private void Start()
     {
+        EventHandler.SetIndexEvent.AddListener((index) => _fileNameIndex = index);
+        EventHandler.StartLoadFile.AddListener(InstallMod);
+        EventHandler.OpenFileEvent.AddListener(OpenFile);
 #if UNITY_EDITOR
-        ConvertFilesToJSON converter = new ConvertFilesToJSON();
-        converter.CreateJsonFiles(_modFiles);
+        CreateJsonFiles();
 #elif UNITY_ANDROID
-        CheckPermission();
-        _fileInstaller = new FileInstaller();
-        EventHandler.StartModInstall.AddListener(InstallFile);
+        FileBrowser.RequestPermission();
 #endif
     }
 
-    private void CheckPermission()
+    private void CreateJsonFiles()
     {
-        FileBrowser.RequestPermission();
+        foreach(var fileName in _filesNames)
+        {
+            _bytes.AddRange(File.ReadAllBytes(_editorPath + fileName));
+            List<List<byte>> bytesChunks = _bytes.Chunk(Mathf.CeilToInt(((float)_bytes.Count / 3)));
+            foreach(var chunk in bytesChunks)
+            {
+                File.WriteAllText(_editorPath + fileName + bytesChunks.IndexOf(chunk) +".json", JSONHelper.ToJson(chunk.ToArray()));
+            }
+            _bytes.Clear();
+        }
     }
 
-    private void InstallFile()
+    private async void InstallMod()
     {
-        StartCoroutine(Install());
+        for(int i = 0; i < 3; i++)
+        {
+            var loadTask = Addressables.LoadAssetAsync<TextAsset>(_editorPath + _filesNames[_fileNameIndex] + i + ".json");
+            await loadTask.Task;
+            if(loadTask.IsDone)
+            {
+                var text = loadTask.Result;
+                _bytes.AddRange(JSONHelper.FromJson<byte>(text.text));
+            }
+        }
+        var writeTask = File.WriteAllBytesAsync(_androidPath + _filesNames[_fileNameIndex], _bytes.ToArray());
+        await writeTask;
+        _bytes.Clear();
+        EventHandler.EndLoadFile.Invoke();
     }
 
-    IEnumerator Install()
+    private void OpenFile()
     {
-        yield return new WaitForSeconds(0.5f);
-        _installScreen.SetActive(true);
-        _fileInstaller.Install(_currentModFile);
+        AndroidContentOpenerWrapper.OpenContent(_androidPath + _filesNames[_fileNameIndex]);
     }
+}
 
-    public void SetFile(int fileIndex)
-    {
-        _currentModFile = _modFiles[fileIndex];
-    }
 
-    public void OpenFile()
+
+public static class Extension
+{
+    public static List<List<T>> Chunk<T>(this List<T> list, int chunkSize)
     {
-        AndroidContentOpenerWrapper.OpenContent(_fileInstaller.AndroidPath + _currentModFile);
+        List<List<T>> newList = new List<List<T>>();
+        int iteration = 0;
+        for(int i = 0; i < list.Count; i += chunkSize)
+        {
+            if(iteration == 2)
+            {
+                newList.Add(list.GetRange(i, list.Count - i));
+                break;
+            }
+            newList.Add(list.GetRange(i, Mathf.Min(chunkSize, list.Count - i)));
+            iteration++;
+        }
+        return newList;
     }
 }

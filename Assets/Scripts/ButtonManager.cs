@@ -1,39 +1,48 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ButtonManager : MonoBehaviour
 {
-    [SerializeField] private string _googlePlayLink;
-    [SerializeField] private string _appLink;
-    [SerializeField] private FileManager _fileManager;
-    [SerializeField] private GameObject[] _allScreens;
-    private int _currentScreenIndex = 0;
+    [SerializeField] private string _rateAppLink;
+    [SerializeField] private string _moreAppsLink;
+    [Header("Buttons visual settings")]
+    [SerializeField] private Image[] _topButtons;
+    [SerializeField] private Sprite _topButtonsImage;
+    [SerializeField] private Image[] _middleButtons;
+    [SerializeField] private Sprite _middleButtonsImage;
+    [SerializeField] private Image[] _bottomButtons;
+    [SerializeField] private Sprite _bottomButtonsImage;
 
-    public void SetFileIndex(int index) => _fileManager.SetFile(index);
-    public void ShowInter() => EventHandler.ShowInter.Invoke();
-    public void ShowRewarded() => EventHandler.ShowRewarded.Invoke();
-    public void NextScreen()
+    private void OnValidate()
     {
-        _allScreens[_currentScreenIndex].SetActive(false);
-        _currentScreenIndex++;
-        _allScreens[_currentScreenIndex].SetActive(true);
+        foreach (var b in _topButtons)
+        {
+            b.sprite = _topButtonsImage;
+        }
+        foreach (var b in _middleButtons)
+        {
+            b.sprite = _middleButtonsImage;
+        }
+        foreach (var b in _bottomButtons)
+        {
+            b.sprite = _bottomButtonsImage;
+        }
     }
 
-    public void PreviousScreen()
+    public void OpenURL(bool isRateApp)
     {
-        _allScreens[_currentScreenIndex].SetActive(false);
-        _currentScreenIndex--;
-        _allScreens[_currentScreenIndex].SetActive(true);
+        if (isRateApp) Application.OpenURL(_rateAppLink);
+        else Application.OpenURL(_moreAppsLink);
     }
 
-    public void ActivateInstallScreen(GameObject currentScreen) => EventHandler.GetPrevScreen.Invoke(currentScreen);
-
-    public void ReturnToStart()
-    {
-        _allScreens[_currentScreenIndex].SetActive(false);
-        _currentScreenIndex = 0;
-        _allScreens[_currentScreenIndex].SetActive(true);
-    }
-    public void OpenFile() => _fileManager.OpenFile();
-    public void RateApp() => Application.OpenURL(_appLink);
-    public void MoreApps() => Application.OpenURL(_googlePlayLink);
+    public void ReturnToStart() => EventHandler.ReturnToStart.Invoke();
+    public void SetModIndex(int index) => EventHandler.SetIndexEvent.Invoke(index);
+    public void SetLoadScreenName(string name) => EventHandler.SetLoadScreenName.Invoke(name);
+    public void InstallMod() => EventHandler.StartLoadFile.Invoke();
+    public void NextScreen() => EventHandler.EnableNextScreen.Invoke();
+    public void PrevScreen() => EventHandler.EnablePrevScreen.Invoke();
+    public void ReturnFromLoadModScreen() => EventHandler.CloseLoadScreen.Invoke();
+    public void OpenMod() => EventHandler.OpenFileEvent.Invoke();
+    public void ShowRewardedAd() => EventHandler.ShowRewardedAd.Invoke();
+    public void ShowInterAd() => EventHandler.ShowInterAd.Invoke();
 }

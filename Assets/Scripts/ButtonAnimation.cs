@@ -1,27 +1,15 @@
 using UnityEngine;
 using DG.Tweening;
-using TMPro;
-using System.Collections;
-using System.Threading.Tasks;
+using UnityEngine.UI;
 
+[RequireComponent(typeof(Image))]
 public class ButtonAnimation : MonoBehaviour
 {
-    [SerializeField] private float _duration;
-    [SerializeField] private Color[] _colors;
-    private TextMeshProUGUI _text;
-    private int _colorIndex = 0;
-
-    private void Start()
+    private Image _buttonImage;
+    void Start()
     {
-        _text = GetComponent<TextMeshProUGUI>();
-        Sequence seq = DOTween.Sequence();
-        seq.Append(_text.DOFade(0, _duration).OnComplete(() =>
-        {
-            _text.color = _colors[_colorIndex];
-            _colorIndex = _colorIndex >= _colors.Length - 1 ? 0 : _colorIndex + 1;
-        }
-        ));
-        seq.Append(_text.DOFade(1, _duration));
-        seq.SetLoops(-1);
+        _buttonImage = GetComponent<Image>();
+        _buttonImage.DOFade(0f, 1f).SetLoops(-1, LoopType.Yoyo);
+        transform.DOScale(0.5f, 1f).SetLoops(-1, LoopType.Yoyo);
     }
 }

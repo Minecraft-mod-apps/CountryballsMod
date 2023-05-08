@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using UnityEngine;
 using YandexMobileAds;
 using YandexMobileAds.Base;
@@ -10,17 +11,17 @@ public class YandexAds : MonoBehaviour
 
     private void Start()
     {
-        if(Application.systemLanguage != SystemLanguage.Russian)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        DontDestroyOnLoad(gameObject);
-        EventHandler.ShowInter.AddListener(ShowAd);
-        EventHandler.ShowRewarded.AddListener(ShowRewarded);
-        EventHandler.LoadingEnd.AddListener(() => _interstitialAd.Show());
-
-        LoadInterstitial();
+        // if (Application.systemLanguage != SystemLanguage.Russian)
+        // {
+        //     Destroy(this);
+        //     return;
+        // }
+        // EventHandler.LoadingIsEnd.AddListener(ShowAd);
+        // EventHandler.ShowInterAd.AddListener(ShowAd);
+        // EventHandler.ShowRewardedAd.AddListener(ShowAd);
+        // DontDestroyOnLoad(gameObject);
+        //
+        // LoadInterstitial();
     }
 
     private void LoadInterstitial()
@@ -31,17 +32,17 @@ public class YandexAds : MonoBehaviour
         _interstitialAd.LoadAd(request);
         _interstitialAd.OnInterstitialFailedToLoad += (arg1, arg2) =>
         {
-            EventHandler.AdIsShowing.Invoke();
+            EventHandler.AdIsShow.Invoke();
         };
         _interstitialAd.OnInterstitialLoaded += (arg1, arg2) =>
         {
-            EventHandler.AdIsShowing.Invoke();
+            EventHandler.AdIsShow.Invoke();
         };
         _interstitialAd.OnInterstitialDismissed += (arg1, arg2) => LoadInterstitial();
         _interstitialAd.OnInterstitialFailedToShow += (arg1, arg2) => LoadInterstitial();
     }
 
-    private void ShowAd()
+    public void ShowAd()
     {
         if (_interstitialAd.IsLoaded())
         {
@@ -51,11 +52,5 @@ public class YandexAds : MonoBehaviour
         {
             LoadInterstitial();
         }
-    }
-    
-    private void ShowRewarded()
-    {
-        ShowAd();
-        EventHandler.StartModInstall.Invoke();
     }
 }
