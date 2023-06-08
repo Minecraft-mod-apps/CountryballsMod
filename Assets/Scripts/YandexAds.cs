@@ -11,17 +11,17 @@ public class YandexAds : MonoBehaviour
 
     private void Start()
     {
-        // if (Application.systemLanguage != SystemLanguage.Russian)
-        // {
-        //     Destroy(this);
-        //     return;
-        // }
-        // EventHandler.LoadingIsEnd.AddListener(ShowAd);
-        // EventHandler.ShowInterAd.AddListener(ShowAd);
-        // EventHandler.ShowRewardedAd.AddListener(ShowAd);
-        // DontDestroyOnLoad(gameObject);
-        //
-        // LoadInterstitial();
+        if (Application.systemLanguage != SystemLanguage.Russian)
+        {
+            Destroy(this);
+            return;
+        }
+        EventHandler.LoadingIsEnd.AddListener(ShowAd);
+        EventHandler.ShowInterAd.AddListener(ShowAd);
+        EventHandler.ShowRewardedAd.AddListener(ShowAd);
+        DontDestroyOnLoad(gameObject);
+        
+        LoadInterstitial();
     }
 
     private void LoadInterstitial()

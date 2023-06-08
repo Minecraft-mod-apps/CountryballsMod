@@ -8,9 +8,6 @@
       <e p="Assembly-CSharp-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
-        <e p="AddressableAssetsData" t="Include">
-          <e p="link.xml" t="Include" />
-        </e>
         <e p="AppMetrica" t="Include">
           <e p="AppMetrica.cs" t="Include" />
           <e p="BaseYandexAppMetrica.cs" t="Include" />
@@ -48,6 +45,26 @@
             <e p="external-dependency-manager_version-1.2.171_manifest.txt" t="Include" />
             <e p="external-dependency-manager_version-1.2.172_manifest.txt" t="Include" />
           </e>
+        </e>
+        <e p="GoogleMobileAds" t="Include">
+          <e p="Editor" t="Include">
+            <e p="BuildPreProcessor.cs" t="Include" />
+            <e p="GoogleMobileAds.Editor.asmdef" t="Include" />
+            <e p="GoogleMobileAdsDependencies.xml" t="Include" />
+            <e p="GoogleMobileAdsSettings.cs" t="Include" />
+            <e p="GoogleMobileAdsSettingsEditor.cs" t="Include" />
+            <e p="GoogleMobileAdsSKAdNetworkItems.xml" t="Include" />
+            <e p="ManifestProcessor.cs" t="Include" />
+            <e p="PListProcessor.cs" t="Include" />
+          </e>
+          <e p="GoogleMobileAds_version-7.0.1_manifest.txt" t="Include" />
+          <e p="link.xml" t="Include" />
+        </e>
+        <e p="GoogleMobileAdsNative" t="Include">
+          <e p="Editor" t="Include">
+            <e p="GoogleMobileAdsNativeDependencies.xml" t="Include" />
+          </e>
+          <e p="link.xml" t="Include" />
         </e>
         <e p="ModFiles" t="Include">
           <e p="CountryBall_BE.mcpack0.json" t="Include" />
@@ -202,9 +219,6 @@
           <e p="ScreenManager.cs" t="Include" />
           <e p="YandexAds.cs" t="Include" />
         </e>
-        <e p="StreamingAssets" t="Include">
-          <e p="UnityServicesProjectConfiguration.json" t="Include" />
-        </e>
         <e p="TextMesh Pro" t="Include">
           <e p="Fonts" t="Include">
             <e p="LiberationSans - OFL.txt" t="Include" />
@@ -314,6 +328,7 @@
         </e>
       </e>
       <e p="CountryballsMod.sln" t="IncludeFlat" />
+      <e p="GoogleMobileAds.Editor.csproj" t="IncludeRecursive" />
       <e p="obj" t="ExcludeRecursive" />
       <e p="OPS.Obfuscator.csproj" t="IncludeRecursive" />
       <e p="Packages" t="ExcludeRecursive" />
