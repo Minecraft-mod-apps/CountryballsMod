@@ -6,29 +6,32 @@ using System.Collections;
 
 public class AdMobManager : MonoBehaviour
 {
-     [SerializeField] private string _interID;
-     [SerializeField] private string _rewardID;
+     private string _interID = "ca-app-pub-2610580573633138/4902449994";
+     //private string _interID = "ca-app-pub-3940256099942544/1033173712"; //test
+     private string _rewardID = "ca-app-pub-2610580573633138/1154776671";
+     //private string _rewardID = "ca-app-pub-3940256099942544/5224354917"; //test
 
 
      private InterstitialAd _interstitialAD;
      private RewardedAd _rewardedAD;
+     private OpenAD _openAd;
 
-     private void Start()
+     private void Awake()
      {
-         if(Application.systemLanguage == SystemLanguage.Russian)
-         {
-             Destroy(gameObject);
-             return;
-         }
+         // if(Application.systemLanguage == SystemLanguage.Russian)
+         // {
+         //     Destroy(gameObject);
+         //     return;
+         // }
          
          EventHandler.ShowInterAd.AddListener(ShowAD);
          EventHandler.ShowRewardedAd.AddListener(ShowRewardedAD);
-         DontDestroyOnLoad(gameObject);
          MobileAds.Initialize((arg1) => { });
          InitID();
-         OpenAD.LoadFailed.AddListener(ShowReserve);
-         OpenAD.Instance().LoadOpenAD();
-         StartCoroutine(OpenAD.Instance().ShowOpenAD());
+         _openAd = GetComponent<OpenAD>();
+         _openAd.LoadFailed.AddListener(ShowReserve);
+         _openAd.LoadOpenAD();
+         StartCoroutine(_openAd.ShowOpenAD());
      }
 
      private void ShowReserve()
@@ -39,42 +42,60 @@ public class AdMobManager : MonoBehaviour
 
      private IEnumerator ShowReserveInter()
      {
-         while (!_interstitialAD.IsLoaded())
+         while (!_interstitialAD.CanShowAd())
          {
              yield return null;
          }
          EventHandler.LoadingIsEnd.Invoke();
-         OpenAD.LoadFailed.RemoveAllListeners();
+         _openAd.LoadFailed.RemoveAllListeners();
          _interstitialAD.Show();
      }
 
      public void InitID()
      {
-         _interstitialAD = new InterstitialAd(_interID);
-         _interstitialAD.OnAdClosed += OnAdClosedHandler;
-         _interstitialAD.OnAdFailedToLoad += (arg1, arg2) => EventHandler.LoadingIsEnd.Invoke();
          LoadAD();
 
-         _rewardedAD = new RewardedAd(_rewardID);
          LoadRewardedAD();
      }
 
      private void LoadAD()
      {
-         AdRequest request = new AdRequest.Builder().Build();
-         _interstitialAD.LoadAd(request);
+         if (_interstitialAD != null)
+         {
+             _interstitialAD.Destroy();
+             _interstitialAD = null;
+         }
+         
+         AdRequest request = new AdRequest();
+         InterstitialAd.Load(_interID, request, (ad, error) =>
+         {
+             if (error != null || ad == null)
+             {
+                 EventHandler.LoadingIsEnd.Invoke();
+                 return;
+             }
+             _interstitialAD = ad;
+             _interstitialAD.OnAdFullScreenContentClosed += LoadAD;
+             _interstitialAD.OnAdFullScreenContentFailed += (arg) => LoadAD();
+         });
      }
 
      private void LoadRewardedAD()
      {
-         AdRequest rewardedRequest = new AdRequest.Builder().Build();
-         _rewardedAD.LoadAd(rewardedRequest);
+         if (_rewardedAD != null)
+         {
+             _rewardedAD.Destroy();
+             _rewardedAD = null;
+         }
+         
+         AdRequest rewardedRequest = new AdRequest();
+         RewardedAd.Load(_rewardID, rewardedRequest, (ad, error) =>
+         {
+             if (error != null || ad == null) return;
+             _rewardedAD = ad;
+             _rewardedAD.OnAdFullScreenContentFailed += error => LoadRewardedAD();
+         });
 
-     }
-
-     private void OnAdClosedHandler(object sender, EventArgs e)
-     {
-         LoadAD();
      }
 
      IEnumerator Downloader()
@@ -86,18 +107,13 @@ public class AdMobManager : MonoBehaviour
 
      public void ShowAD()
      {
-         if (_interstitialAD != null)
+         if (_interstitialAD == null) return;
+         if (!_interstitialAD.CanShowAd())
          {
-             if (!_interstitialAD.IsLoaded())
-             {
-                 LoadAD();
-             }
-
-             if (_interstitialAD.IsLoaded())
-             {
-                 _interstitialAD.Show();
-             }
+             LoadAD();
+             return;
          }
+         _interstitialAD.Show();
 
      }
 
@@ -105,10 +121,12 @@ public class AdMobManager : MonoBehaviour
      {
          if (_rewardedAD != null)
          {
-             if (_rewardedAD.IsLoaded())
+             if (_rewardedAD.CanShowAd())
              {
-                 _rewardedAD.OnUserEarnedReward += (arg1, arg2) => StartCoroutine(Downloader());
-                 _rewardedAD.Show();
+                 _rewardedAD.Show((reward =>
+                 {
+                     StartCoroutine(Downloader());
+                 }));
                  return;
              }
          }

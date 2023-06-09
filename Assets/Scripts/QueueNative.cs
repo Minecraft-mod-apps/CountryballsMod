@@ -13,19 +13,20 @@ namespace Native
          [SerializeField] private NativeComponent _missClickComponent;
          private Queue<NativeAd> _queueNativeAd;
          private const string _id = "ca-app-pub-2610580573633138/8937913836";
+         //private const string _id = "ca-app-pub-3940256099942544/2247696110"; //test
          private string _nativeType = "regular";
 
 
          private void Start()
          {
-             if (Application.systemLanguage == SystemLanguage.Russian)
-             {
-                 EventHandler.LoadEndNative.Invoke();
-                 _nativeComponent.gameObject.SetActive(false);
-                 _missClickComponent.gameObject.SetActive(false);
-                 Destroy(this);
-                 return;
-             }
+             // if (Application.systemLanguage == SystemLanguage.Russian)
+             // {
+             //     EventHandler.LoadEndNative.Invoke();
+             //     _nativeComponent.gameObject.SetActive(false);
+             //     _missClickComponent.gameObject.SetActive(false);
+             //     Destroy(this);
+             //     return;
+             // }
              
              _queueNativeAd = new Queue<NativeAd>();
              CycleAdCreating(_adCount);

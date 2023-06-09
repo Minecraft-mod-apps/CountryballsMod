@@ -1,83 +1,70 @@
 using System.Collections;
 using UnityEngine;
 using GoogleMobileAds.Api;
-using System;
+using GoogleMobileAds.Common;
 using UnityEngine.Events;
 
-public class OpenAD
+public class OpenAD : MonoBehaviour
 {
     private const string _adID = "ca-app-pub-2610580573633138/8650123311";
+    //private const string _adID = "ca-app-pub-3940256099942544/3419835294";//test
     private static OpenAD _instance;
     private AppOpenAd _openAD;
     private bool _isShow;
-    private DateTime _loadTime;
 
-    public static UnityEvent LoadFailed = new UnityEvent();
+    public UnityEvent LoadFailed = new UnityEvent();
 
-    public static OpenAD Instance()
+    private void Start()
     {
-        if (_instance == null)
+        AppStateEventNotifier.AppStateChanged += state =>
         {
-            _instance = new OpenAD();
-        }
-        return _instance;
+            if(state == AppState.Foreground) Show();
+        };
     }
 
     public bool IsAvailable()
     {
-        return _openAD != null && (DateTime.UtcNow - _loadTime).TotalHours < 4;
+        return _openAD != null;
     }
 
     public void LoadOpenAD()
     {
-        if (_openAD == null)
+        if (_openAD != null)
         {
-            AdRequest request = new AdRequest.Builder().Build();
-            AppOpenAd.LoadAd(_adID, ScreenOrientation.Portrait, request, ((ad, error) =>
-            {
-                if (error == null)
-                {
-                    _openAD = ad;
-                    _loadTime = DateTime.UtcNow;
-                }
-                else
-                {
-                    LoadFailed.Invoke();
-                }
-            }));
+            _openAD.Destroy();
+            _openAD = null;
         }
+        AdRequest request = new AdRequest();
+        AppOpenAd.Load(_adID, ScreenOrientation.Portrait, request, ((ad, error) =>
+        {
+            if (error != null || ad == null)
+            {
+                LoadFailed.Invoke();
+                return;
+            } 
+            _openAD = ad;
+            _openAD.OnAdFullScreenContentClosed += () =>
+            {
+                EventHandler.LoadingIsEnd.Invoke();
+                LoadOpenAD();
+            };
+            _openAD.OnAdFullScreenContentFailed += adError => LoadOpenAD();
+            _isShow = true;
+        }));
     }
 
     public IEnumerator ShowOpenAD()
     {
         while (!IsAvailable())
         {
-            yield return null;
-            if (_isShow)
-            {
-                break;
-            }
+            yield return new WaitForSeconds(.1f);
         }
-        if (!_isShow)
-        {
-            _openAD.OnAdDidDismissFullScreenContent += (sender, e) =>
-            {
-                _openAD = null;
-                _isShow = false;
-                EventHandler.LoadingIsEnd.Invoke();
-                LoadOpenAD();
-            };
+        Show();
+    }
 
-            _openAD.OnAdDidPresentFullScreenContent += (sende, e) => _isShow = true;
-
-            _openAD.OnAdFailedToPresentFullScreenContent += (sender, e) =>
-            {
-                _openAD = null;
-                LoadOpenAD();
-            };
-            LoadFailed.RemoveAllListeners();
-            _openAD.Show();
-        }
-
+    private void Show()
+    {
+        LoadFailed.RemoveAllListeners();
+        _openAD.Show();
     }
 }
