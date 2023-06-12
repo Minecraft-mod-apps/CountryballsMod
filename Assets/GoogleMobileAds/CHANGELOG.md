@@ -1,37 +1,6 @@
 Google Mobile Ads Unity Plugin Change Log
 
 **************
-Version 8.3.0
-**************
-
-- Added support to RaiseAdEventsOnUnityMainThread for UMP callbacks.
-- Added support for Ad Manager interstitial ad.
-- Updated Google Mobile Ads SDK dependency to use v22.1.0 on Android.
-- Updated Google Mobile Ads SDK dependency to use v10.5 on iOS.
-
-Built and tested with:
-- Google Mobile Ads Android SDK 22.1.0
-- Google Mobile Ads iOS SDK 10.5
-- Google User Messaging Platform 2.0.0
-- External Dependency Manager for Unity 1.2.176
-
-**************
-Version 8.2.0
-**************
-
-- Fixed [#2646] Android Banner 'Descendant focus' crash.
-- Fixed [#2676] Raising Interstitial events on main thread.
-- Deprecated builder pattern in AdRequest, RequestConfiguration and ServerSideVerificationOptions Class. Utilize fields instead.
-- Added AdManagerAdRequest class to allow passing CustomTargeting, CategoryExclusions and PublisherProvidedId as part of AdManager requests.
-- Updated Google Mobile Ads SDK dependency to use v10.4 on iOS.
-
-Built and tested with:
-- Google Mobile Ads Android SDK 22.0.0
-- Google Mobile Ads iOS SDK 10.4
-- Google User Messaging Platform 2.0.0
-- External Dependency Manager for Unity 1.2.176
-
-**************
 Version 8.1.0
 **************
 

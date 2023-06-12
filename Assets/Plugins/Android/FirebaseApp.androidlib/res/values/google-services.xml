@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_android_client_id,@string/default_web_client_id">
+  <string name="gcm_defaultSenderId" translatable="false">85068600450</string>
+  <string name="google_storage_bucket" translatable="false">countryballs-mod-for-minecraft.appspot.com</string>
+  <string name="project_id" translatable="false">countryballs-mod-for-minecraft</string>
+  <string name="google_api_key" translatable="false">AIzaSyA5lBDgSDDsGm5mj_NVVlA1I4CitpcMuKI</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyA5lBDgSDDsGm5mj_NVVlA1I4CitpcMuKI</string>
+  <string name="google_app_id" translatable="false">1:85068600450:android:2cdd903bc7254fe50b909b</string>
+  <string name="default_android_client_id" translatable="false">85068600450-k3j4630kleobckj1fndslnnjjmhqanir.apps.googleusercontent.com</string>
+  <string name="default_web_client_id" translatable="false">85068600450-5b9uaqss1ebsoujq3lpoo0h602gtv8vv.apps.googleusercontent.com</string>
+</resources>

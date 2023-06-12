@@ -19,14 +19,14 @@ namespace Native
 
          private void Start()
          {
-             // if (Application.systemLanguage == SystemLanguage.Russian)
-             // {
-             //     EventHandler.LoadEndNative.Invoke();
-             //     _nativeComponent.gameObject.SetActive(false);
-             //     _missClickComponent.gameObject.SetActive(false);
-             //     Destroy(this);
-             //     return;
-             // }
+             if (Application.systemLanguage == SystemLanguage.Russian)
+             {
+                 EventHandler.LoadEndNative.Invoke();
+                 _nativeComponent.gameObject.SetActive(false);
+                 _missClickComponent.gameObject.SetActive(false);
+                 Destroy(this);
+                 return;
+             }
              
              _queueNativeAd = new Queue<NativeAd>();
              CycleAdCreating(_adCount);

@@ -15,6 +15,7 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/NativeRegister.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/OpenAD.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/QueueNative.cs" />
+        <option value="$PROJECT_DIR$/Assets/CrashlyticsTester.cs" />
       </list>
     </option>
   </component>
@@ -60,6 +61,7 @@
       <workItem from="1683542783947" duration="2984000" />
       <workItem from="1684744672982" duration="1668000" />
       <workItem from="1686226785696" duration="786000" />
+      <workItem from="1686554999085" duration="622000" />
     </task>
     <servers />
   </component>

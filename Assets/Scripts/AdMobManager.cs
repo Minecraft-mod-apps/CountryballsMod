@@ -18,11 +18,11 @@ public class AdMobManager : MonoBehaviour
 
      private void Awake()
      {
-         // if(Application.systemLanguage == SystemLanguage.Russian)
-         // {
-         //     Destroy(gameObject);
-         //     return;
-         // }
+         if(Application.systemLanguage == SystemLanguage.Russian)
+         {
+             Destroy(gameObject);
+             return;
+         }
          
          EventHandler.ShowInterAd.AddListener(ShowAD);
          EventHandler.ShowRewardedAd.AddListener(ShowRewardedAD);
@@ -30,7 +30,6 @@ public class AdMobManager : MonoBehaviour
          InitID();
          _openAd = GetComponent<OpenAD>();
          _openAd.LoadFailed.AddListener(ShowReserve);
-         _openAd.LoadOpenAD();
          StartCoroutine(_openAd.ShowOpenAD());
      }
 
@@ -66,7 +65,7 @@ public class AdMobManager : MonoBehaviour
              _interstitialAD = null;
          }
          
-         AdRequest request = new AdRequest();
+         AdRequest request = new AdRequest.Builder().Build();
          InterstitialAd.Load(_interID, request, (ad, error) =>
          {
              if (error != null || ad == null)
@@ -88,7 +87,7 @@ public class AdMobManager : MonoBehaviour
              _rewardedAD = null;
          }
          
-         AdRequest rewardedRequest = new AdRequest();
+         AdRequest rewardedRequest = new AdRequest.Builder().Build();
          RewardedAd.Load(_rewardID, rewardedRequest, (ad, error) =>
          {
              if (error != null || ad == null) return;

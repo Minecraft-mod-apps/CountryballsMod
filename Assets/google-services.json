@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "85068600450",
+    "project_id": "countryballs-mod-for-minecraft",
+    "storage_bucket": "countryballs-mod-for-minecraft.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:85068600450:android:2cdd903bc7254fe50b909b",
+        "android_client_info": {
+          "package_name": "com.snazzymods.countryballsmod"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "85068600450-k3j4630kleobckj1fndslnnjjmhqanir.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.snazzymods.countryballsmod",
+            "certificate_hash": "f5de85408ff9e9672007a23006fb147238a88d5c"
+          }
+        },
+        {
+          "client_id": "85068600450-5b9uaqss1ebsoujq3lpoo0h602gtv8vv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5lBDgSDDsGm5mj_NVVlA1I4CitpcMuKI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "85068600450-5b9uaqss1ebsoujq3lpoo0h602gtv8vv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
