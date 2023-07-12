@@ -3,15 +3,19 @@ using UnityEngine;
 using GoogleMobileAds.Api;
 using System;
 using System.Collections;
+using GoogleMobileAds.Common;
 
 public class AdMobManager : MonoBehaviour
 {
-     [SerializeField] private string _interID;
-     [SerializeField] private string _rewardID;
+     private string _interID = "ca-app-pub-2610580573633138/4902449994";
+     //private string _interID = "ca-app-pub-3940256099942544/1033173712"; //test
+     private string _rewardID = "ca-app-pub-2610580573633138/1154776671";
+     //private string _rewardID = "ca-app-pub-3940256099942544/5224354917"; //test
 
 
      private InterstitialAd _interstitialAD;
      private RewardedAd _rewardedAD;
+     private OpenAD _openAd;
 
      private void Start()
      {
@@ -20,15 +24,22 @@ public class AdMobManager : MonoBehaviour
              Destroy(gameObject);
              return;
          }
-         
+
+         MobileAds.Initialize((arg1) => { 
+             AppStateEventNotifier.AppStateChanged += state =>
+               {
+                   if(state == AppState.Foreground)
+                      _openAd.Show();
+               };});
+
          EventHandler.ShowInterAd.AddListener(ShowAD);
          EventHandler.ShowRewardedAd.AddListener(ShowRewardedAD);
          DontDestroyOnLoad(gameObject);
-         MobileAds.Initialize((arg1) => { });
          InitID();
+         _openAd = new OpenAD();
          OpenAD.LoadFailed.AddListener(ShowReserve);
-         OpenAD.Instance().LoadOpenAD();
-         StartCoroutine(OpenAD.Instance().ShowOpenAD());
+         _openAd.LoadOpenAD();
+         StartCoroutine(_openAd.ShowOpenAD());
      }
 
      private void ShowReserve()

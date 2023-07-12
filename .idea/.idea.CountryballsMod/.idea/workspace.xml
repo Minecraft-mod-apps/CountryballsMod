@@ -7,13 +7,17 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/../AvatarModeTest/Assets/Scripts/QueueNative.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../AquaticModTest/Assets/Scripts/QueueNative.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/AdMobManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/YandexAds.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/NativeRegister.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/OpenAD.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/AdMobManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/NativeRegister.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/QueueNative.cs" />
       </list>
     </option>
@@ -60,6 +64,8 @@
       <workItem from="1683542783947" duration="2984000" />
       <workItem from="1684744672982" duration="1668000" />
       <workItem from="1686226785696" duration="786000" />
+      <workItem from="1687770199420" duration="5946000" />
+      <workItem from="1688652433955" duration="3158000" />
     </task>
     <servers />
   </component>

@@ -42,8 +42,29 @@
         </e>
         <e p="ExternalDependencyManager" t="Include">
           <e p="Editor" t="Include">
-            <e p="external-dependency-manager_version-1.2.171_manifest.txt" t="Include" />
-            <e p="external-dependency-manager_version-1.2.172_manifest.txt" t="Include" />
+            <e p="external-dependency-manager_version-1.2.175_manifest.txt" t="Include" />
+          </e>
+        </e>
+        <e p="Firebase" t="Include">
+          <e p="Editor" t="Include">
+            <e p="AppDependencies.xml" t="Include" />
+            <e p="CrashlyticsDependencies.xml" t="Include" />
+            <e p="FirebaseCrashlytics_version-11.1.0_manifest.txt" t="Include" />
+          </e>
+          <e p="google-services.json" t="Include" />
+          <e p="m2repository" t="Include">
+            <e p="com" t="Include">
+              <e p="google" t="Include">
+                <e p="Firebase" t="Include">
+                  <e p="firebase-app-unity" t="Include">
+                    <e p="maven-metadata.xml" t="Include" />
+                  </e>
+                  <e p="firebase-crashlytics-unity" t="Include">
+                    <e p="maven-metadata.xml" t="Include" />
+                  </e>
+                </e>
+              </e>
+            </e>
           </e>
         </e>
         <e p="GoogleMobileAds" t="Include">
@@ -54,10 +75,11 @@
             <e p="GoogleMobileAdsSettings.cs" t="Include" />
             <e p="GoogleMobileAdsSettingsEditor.cs" t="Include" />
             <e p="GoogleMobileAdsSKAdNetworkItems.xml" t="Include" />
+            <e p="GoogleUmpDependencies.xml" t="Include" />
             <e p="ManifestProcessor.cs" t="Include" />
             <e p="PListProcessor.cs" t="Include" />
           </e>
-          <e p="GoogleMobileAds_version-7.0.1_manifest.txt" t="Include" />
+          <e p="GoogleMobileAds_version-7.4.1_manifest.txt" t="Include" />
           <e p="link.xml" t="Include" />
         </e>
         <e p="GoogleMobileAdsNative" t="Include">
@@ -143,6 +165,23 @@
         <e p="Plugins" t="Include">
           <e p="Android" t="Include">
             <e p="AndroidManifest.xml" t="Include" />
+            <e p="FirebaseApp.androidlib" t="Include">
+              <e p="AndroidManifest.xml" t="Include" />
+              <e p="res" t="Include">
+                <e p="values" t="Include">
+                  <e p="google-services.xml" t="Include" />
+                </e>
+              </e>
+            </e>
+            <e p="FirebaseCrashlytics.androidlib" t="Include">
+              <e p="AndroidManifest.xml" t="Include" />
+              <e p="res" t="Include">
+                <e p="values" t="Include">
+                  <e p="crashlytics_build_id.xml" t="Include" />
+                  <e p="crashlytics_unity_version.xml" t="Include" />
+                </e>
+              </e>
+            </e>
             <e p="GoogleMobileAdsPlugin.androidlib" t="Include">
               <e p="AndroidManifest.xml" t="Include" />
             </e>
@@ -218,6 +257,9 @@
           <e p="RateAppPanelAnimation.cs" t="Include" />
           <e p="ScreenManager.cs" t="Include" />
           <e p="YandexAds.cs" t="Include" />
+        </e>
+        <e p="StreamingAssets" t="Include">
+          <e p="google-services-desktop.json" t="Include" />
         </e>
         <e p="TextMesh Pro" t="Include">
           <e p="Fonts" t="Include">

@@ -7,21 +7,22 @@ using UnityEngine.Events;
 public class OpenAD
 {
     private const string _adID = "ca-app-pub-2610580573633138/8650123311";
+    //private const string _adID = "ca-app-pub-3940256099942544/3419835294"; //test
     private static OpenAD _instance;
     private AppOpenAd _openAD;
     private bool _isShow;
     private DateTime _loadTime;
 
     public static UnityEvent LoadFailed = new UnityEvent();
-
-    public static OpenAD Instance()
-    {
-        if (_instance == null)
-        {
-            _instance = new OpenAD();
-        }
-        return _instance;
-    }
+    //
+    // public static OpenAD Instance()
+    // {
+    //     if (_instance == null)
+    //     {
+    //         _instance = new OpenAD();
+    //     }
+    //     return _instance;
+    // }
 
     public bool IsAvailable()
     {
@@ -78,6 +79,14 @@ public class OpenAD
             LoadFailed.RemoveAllListeners();
             _openAD.Show();
         }
+        LoadOpenAD();
 
+    }
+
+    public void Show()
+    {
+        if(_openAD.CanShowAd())
+            _openAD.Show();
+        LoadOpenAD();
     }
 }
